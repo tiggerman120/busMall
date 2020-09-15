@@ -71,8 +71,9 @@ console.log(rng());
 // indexCenter = document.getElementById('centerIndex');
 // indexRight = document.getElementById('rightIndex');
 function rngImg() {
-  var indexRender = [Math.floor(Math.random() * allItems.length)];
+  
     for( var i = 0; i < 3; i++) {
+        //assign variable with value of rng() push the value into a global array and use that variable as the index on line 80 and in tallyvote function
         var x = 'indexImg' + i;
         console.log(x);
         var imgCall = document.getElementById(x);
