@@ -2,39 +2,42 @@
 //i need to generate 3 new images. increment everything properly. get clarification on bullet 1 of step 4 and display votes received and number oftimes each image is views
 //global variables
 var allItems = [];
-var arrayOfImagesToBeDisplayed = [];
-var globalSingleImg = [];
+// var arrayOfImagesToBeDisplayed = [];
+// var globalSingleImg = [];
 var votingRoundsTotal = 0;
+// var arrayOfAllPictures = [];
 var eventListener = document.getElementById('boxOfButtons');
 eventListener.addEventListener('click', voteCounter);
 //Objects
-new busMall('R2D2 Luggage', '/img/bag.jpg');
-new busMall('banana slicer', '/img/banana.jpg');
-new busMall('lazy Pooper', '/img/bathroom.jpg');
-new busMall('toeless boots', '/img/boots.jpg');
-new busMall('breakfast machine', '/img/breakfast.jpg');
-new busMall('meatball gum', '/img/bubblegum.jpg');
-new busMall('straddle chair', '/img/chair.jpg');
-new busMall('cthulhu figurine', '/img/cthulhu.jpg');
-new busMall('duck muzzle', '/img/dog-duck.jpg');
-new busMall('dragon meat', '/img/dragon.jpg');
-new busMall('utensil pens', '/img/pen.jpg');
-new busMall('dog broom feet', '/img/pet-sweep.jpg');
-new busMall('pizza scissors', '/img/scissors.jpg');
-new busMall('shark', '/img/shark.jpg');
-new busMall('sweep', '/img/sweep.png');
-new busMall('tauntaun', '/img/tauntaun.jpg');
-new busMall('unicorn', '/img/unicorn.jpg');
-new busMall('usb', '/img/water-can.jpg');
-new busMall('water can', '/img/water-can.jpg');
-new busMall('wine-glass', '/img/wine-glass.jpg');
+new BusMall('R2D2 Luggage', '/img/bag.jpg');
+new BusMall('banana slicer', '/img/banana.jpg');
+new BusMall('lazy Pooper', '/img/bathroom.jpg');
+new BusMall('toeless boots', '/img/boots.jpg');
+new BusMall('breakfast machine', '/img/breakfast.jpg');
+new BusMall('meatball gum', '/img/bubblegum.jpg');
+new BusMall('straddle chair', '/img/chair.jpg');
+new BusMall('cthulhu figurine', '/img/cthulhu.jpg');
+new BusMall('duck muzzle', '/img/dog-duck.jpg');
+new BusMall('dragon meat', '/img/dragon.jpg');
+new BusMall('utensil pens', '/img/pen.jpg');
+new BusMall('dog broom feet', '/img/pet-sweep.jpg');
+new BusMall('pizza scissors', '/img/scissors.jpg');
+new BusMall('shark', '/img/shark.jpg');
+new BusMall('sweep', '/img/sweep.png');
+new BusMall('tauntaun', '/img/tauntaun.jpg');
+new BusMall('unicorn', '/img/unicorn.jpg');
+new BusMall('usb', '/img/water-can.jpg');
+new BusMall('water can', '/img/water-can.jpg');
+new BusMall('wine-glass', '/img/wine-glass.jpg');
 
 //constructor
-function busMall(itemName, itemImage) {
-    this.productName = itemName;
-    this.productImage = itemImage;
+function BusMall(itemName, itemImage) {
+    this.name = itemName;
+    this.picture = itemImage;
+    this.arrayOfThreePictures = [];
     this.clicked = 0;
     this.views = 0; //this increments everytime an item is displayed
+
     allItems.push(this); //this fills my array of items
 
 }
@@ -60,14 +63,50 @@ function rng() {
     //this function generates a random number and uses it as an index reference number
     //that is why my clicks dont work
 }
+
+// function getMyShitOnTheScreenWithWhileLoops() {
+//     //this will hold all 3 index values
+//     var arrayOfThreePictures = [];
+//     //this will store the first two pictures
+//     arrayOfThreePictures[0] = rng();
+//     arrayOfThreePictures[1] = rng();
+//     //I need someone to help me with while loops I don't think i understand them.
+//     while (arrayOfThreePictures[0] === arrayOfThreePictures[1]) {
+//         console.log('this is checking if the while loop ran');
+//         arrayOfThreePictures[1] = rng();
+
+//         //I am putting the third unique picture on the screen
+//         arrayOfThreePictures[2] = rng();
+//         while (arrayOfThreePictures[2] === arrayOfThreePictures[1] || arrayOfThreePictures[2] === arrayOfThreePictures[0]); {
+//             console.log('this is checking if the while loop ran');
+//             arrayOFThreePictures[2] = rng();
+//         }
+//     }
+//     for (var i = 0; i < 3; i++) {
+//         //i dont know how to call these file paths. //is this dot notation? i am so stressed out i really cant afford to feel this fucking lost
+//         allItems.picture[i].src = allItems[arrayOfThreePictures[i]].path;
+//         busMall.picture[i].id = busMall.allItems[arrayOfThreePictures[i]].name;
+//         busMall.allItems[arrayOfThreePictures[i]].views += 1;
+//     }
+// }
+// getMyShitOnTheScreenWithWhileLoops()
+
+
+
+
+
+
+
+
 // console.log(rng());
 function generateLeftImageAndDisplayIt() {
     var arrayOfImagesToBeDisplayed = [];
     var singleImg = document.getElementById('leftImg');
     var randomNum = rng();
-    arrayOfImagesToBeDisplayed = allItems[randomNum].productImage
-    singleImg.setAttribute('src', arrayOfImagesToBeDisplayed)
+    arrayOfImagesToBeDisplayed = allItems[randomNum].picture;
+    singleImg.setAttribute('src', arrayOfImagesToBeDisplayed);
     singleImg.setAttribute('value', randomNum);
+    BusMall.views++;
     // console.log(arrayOfImagesToBeDisplayed);
 }
 generateLeftImageAndDisplayIt();
@@ -76,9 +115,10 @@ function generateCenterImageAndDisplayIt() {
     var arrayOfImagesToBeDisplayed = [];
     var singleImg = document.getElementById('centerImg');
     var randomNum = rng();
-    arrayOfImagesToBeDisplayed = allItems[randomNum].productImage
-    singleImg.setAttribute('src', arrayOfImagesToBeDisplayed)
+    arrayOfImagesToBeDisplayed = allItems[randomNum].picture;
+    singleImg.setAttribute('src', arrayOfImagesToBeDisplayed);
     singleImg.setAttribute('value', randomNum);
+    BusMall.views++;
     // console.log(arrayOfImagesToBeDisplayed);
 }
 generateCenterImageAndDisplayIt();
@@ -88,10 +128,12 @@ function generateRightImageAndDisplayIt() {
     var arrayOfImagesToBeDisplayed = [];
     var singleImg = document.getElementById('rightImg');
     var randomNum = rng();
-    arrayOfImagesToBeDisplayed = allItems[randomNum].productImage
+    arrayOfImagesToBeDisplayed = allItems[randomNum].picture;
     singleImg.setAttribute('src', arrayOfImagesToBeDisplayed);
     singleImg.setAttribute('value', randomNum);
-    // product.views += 1
+    BusMall.views++;
+
+
     //  var button = document.getElementById('item3');
     //  button.setAttribute('value', arrayOfImagesToBeDisplayed)
     // console.log(arrayOfImagesToBeDisplayed);
@@ -99,28 +141,29 @@ function generateRightImageAndDisplayIt() {
 generateRightImageAndDisplayIt();
 
 //use a while loop inside the image generators to prvent it from picking the same image in each iteration
-// function voteTwentyFiveTimes() {
-//     for (var i = 0; i < 25; i++) {
+function voteTwentyFiveTimes() {
+    for (var i = 0; i < 25; i++) {
+        // console.log(votingRoundsTotal);
+        if (votingRoundsTotal < 25) {
+            votingRoundsTotal++;
+        }
+        // if (votingRoundsTotal < 25) {
 
-//         console.log(votingRoundsTotal);
-//         if (votingRoundsTotal < 25) {
-//             votingRoundsTotal++
-//         }console.log(votingRoundsTotal);
-
-
-//     }console.log(votingRoundsTotal);
-// }
-// voteTwentyFiveTimes()
+    }
+    //console.log(votingRoundsTotal);
+    console.log(votingRoundsTotal);
+}
+voteTwentyFiveTimes();
 
 function voteCounter(event) {
 
     var index = event.target.attributes[0].value;
     console.log(index);
     var product = allItems[index];
-    // product.clicked += 1;
+    product.clicked += 1;
 
-    // console.log(product.views);
-    votingRoundsTotal++
+    console.log(product.views);
+    votingRoundsTotal++;
 
 
     console.log('clicky' + product.clicked);
@@ -130,33 +173,35 @@ function voteCounter(event) {
         eventListener2.removeEventListener('click', voteCounter);
         eventListener3.removeEventListener('click', voteCounter);
     }
-    // if (event.target === true) {
-    //     generateLeftImageAndDisplayIt();
-    //     generateCenterImageAndDisplayIt();
-    //     generateRightImageAndDisplayIt();
-    // } console.log(event.target);
-    //   this.clicked += 1;
-    //     console.log(this.clicked);
-    //if source url is === source url then + 1
 }
+// if (event.target === true) {
+//     generateLeftImageAndDisplayIt();
+//     generateCenterImageAndDisplayIt();
+//     generateRightImageAndDisplayIt();
+// } console.log(event.target);
+//   this.clicked += 1;
+//     console.log(this.clicked);
+//if source url is === source url then + 1
+//}
+var eventListener1 = document.getElementById('item1');
+var eventListener2 = document.getElementById('item2');
+var eventListener3 = document.getElementById('item3');
+eventListener1.addEventListener('click', voteCounter);
+eventListener2.addEventListener('click', voteCounter);
+eventListener3.addEventListener('click', voteCounter);
 
-// var eventListener2 = document.getElementById('item2');
-// var eventListener3 = document.getElementById('item3');
-// eventListener1.addEventListener('click', voteCounter);
-// eventListener2.addEventListener('click', voteCounter);
-// eventListener3.addEventListener('click', voteCounter);
 
-//THIS IS WORKING
-// indexCenter = document.getElementById('centerIndex');
-// indexRight = document.getElementById('rightIndex');
+// var indexLeft = document.getElementById('leftImg')
+// var indexCenter = document.getElementById('centerImg');
+// var indexRight = document.getElementById('rightImg');
 // function putThreeImagesOntoThePage() {
 //     var arrayOfThreePictures = []
-//     for( var i = 0; i < 3; i++)
-//     var singleImg = document.getElementById('leftImg');
-//      arrayOfImagesToBeDisplayed = allItems[rng()].productImage
-//      singleImg.setAttribute('src', arrayOfImagesToBeDisplayed)
-//       arrayOfThreePictures.push(allItems[rng()].productImage)
-// console.log(arrayOfThreePictures)
+//     for (var i = 0; i < 3; i++)
+//         var singleImg = document.getElementById('leftImg');
+//     arrayOfImagesToBeDisplayed = allItems[arrayOfThreePictures[i]].picture
+//     singleImg.setAttribute('src', arrayOfImagesToBeDisplayed)
+//     arrayOfThreePictures.push(allItems[rng()].productImage)
+//     console.log(arrayOfThreePictures)
 // }
 // putThreeImagesOntoThePage();
 
@@ -177,7 +222,7 @@ function voteCounter(event) {
 //   }
 // }
 // function renderImg() {
-// 
+//
 // console.log(indexLeft.src);
 // indexCenter.src = busMall.allitems[rng()].productImage;
 // console.log(indexCenter.src);
