@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/style.css" rel="stylesheet">
     <title>Document</title>
 </head>
-<body>
-<form id="boxOfButtons">
-    <fieldset>
-      <button id=item1><img value="0" src="" id="leftImg"/></button>
-    
-      <button id=item2><img value="0" src="" id="centerImg"/></button>
-    
-      <button id=item3><img value="0" src="" id="rightImg"/></button>
-    </fieldset>
 
-</form>
+<body>
+    <form id="boxOfButtons">
+        <fieldset>
+            <button name="data" id="item1" type="button" onclick="return generateLeftImageAndDisplayIt();"><img
+                    value="0" src="" id="leftImg" /></button>
+
+            <button name="data" id="item2" type="button" onclick="return generateCenterImageAndDisplayIt();"><img
+                    value="0" src="" id="centerImg" /></button>
+
+            <button name="data" id="item3" type="button" onclick="return generateRightImageAndDisplayIt();"><img
+                    value="0" src="" id="rightImg" /></button>
+        </fieldset>
+
+    </form>
     <script src="js/app.js"></script>
 </body>
+
 </html>
