@@ -1,13 +1,16 @@
+/* eslint-disable indent */
 'use strict';
 //i need to generate 3 new images. increment everything properly. get clarification on bullet 1 of step 4 and display votes received and number oftimes each image is views
 //global variables
-var allItems = [];
-// var arrayOfImagesToBeDisplayed = [];
+BusMall.allItems = [];
+var arrayOfImagesToBeDisplayed = [];
+var integer = rng();
 // var globalSingleImg = [];
 var votingRoundsTotal = 0;
-// var arrayOfAllPictures = [];
-var eventListener = document.getElementById('boxOfButtons');
-eventListener.addEventListener('click', voteCounter);
+var maxRounds = 5;
+var arrayOfThreePictures = [];
+// var eventListener = document.getElementById('boxOfButtons');
+// eventListener.addEventListener('click', voteCounter);
 //Objects
 new BusMall('R2D2 Luggage', '/img/bag.jpg');
 new BusMall('banana slicer', '/img/banana.jpg');
@@ -38,7 +41,7 @@ function BusMall(itemName, itemImage) {
     this.clicked = 0;
     this.views = 0; //this increments everytime an item is displayed
 
-    allItems.push(this); //this fills my array of items
+    BusMall.allItems.push(this); //this fills my array of items
 
 }
 
@@ -58,15 +61,16 @@ function BusMall(itemName, itemImage) {
 
 
 function rng() {
-    var randomNumber = [Math.floor(Math.random() * allItems.length)];
+    var randomNumber = Math.floor(Math.random() * BusMall.allItems.length);
     return randomNumber;
     //this function generates a random number and uses it as an index reference number
     //that is why my clicks dont work
 }
 
+
 // function getMyShitOnTheScreenWithWhileLoops() {
 //     //this will hold all 3 index values
-//     var arrayOfThreePictures = [];
+//     arrayOfThreePictures = [];
 //     //this will store the first two pictures
 //     arrayOfThreePictures[0] = rng();
 //     arrayOfThreePictures[1] = rng();
@@ -75,105 +79,183 @@ function rng() {
 //         console.log('this is checking if the while loop ran');
 //         arrayOfThreePictures[1] = rng();
 
-//         //I am putting the third unique picture on the screen
+//         //I am comparing the third unique picture
 //         arrayOfThreePictures[2] = rng();
 //         while (arrayOfThreePictures[2] === arrayOfThreePictures[1] || arrayOfThreePictures[2] === arrayOfThreePictures[0]); {
 //             console.log('this is checking if the while loop ran');
-//             arrayOFThreePictures[2] = rng();
+//             arrayOfThreePictures[2] = rng();
 //         }
+//         console.log(arrayOfThreePictures[0]);
 //     }
-//     for (var i = 0; i < 3; i++) {
-//         //i dont know how to call these file paths. //is this dot notation? i am so stressed out i really cant afford to feel this fucking lost
-//         allItems.picture[i].src = allItems[arrayOfThreePictures[i]].path;
-//         busMall.picture[i].id = busMall.allItems[arrayOfThreePictures[i]].name;
-//         busMall.allItems[arrayOfThreePictures[i]].views += 1;
-//     }
+//     // eslint-disable-next-line indent
+//     //   for (var i = 0; i < 3; i++) {
+//     //     //i dont know how to call these file paths. //is this dot notation? i am so stressed out i really cant afford to feel this fucking lost
+//     //     allItems.picture[i].src = allItems[arrayOfThreePictures[i]].path;
+//     //     BusMall.picture[i].id = BusMall.allItems[arrayOfThreePictures[i]].name;
+//     //     BusMall.allItems[arrayOfThreePictures[i]].views += 1;
+
 // }
-// getMyShitOnTheScreenWithWhileLoops()
+// getMyShitOnTheScreenWithWhileLoops();
 
-
-
-
-
-
-
-
-// console.log(rng());
-function generateLeftImageAndDisplayIt() {
-    var arrayOfImagesToBeDisplayed = [];
-    var singleImg = document.getElementById('leftImg');
-    var randomNum = rng();
-    arrayOfImagesToBeDisplayed = allItems[randomNum].picture;
-    singleImg.setAttribute('src', arrayOfImagesToBeDisplayed);
-    singleImg.setAttribute('value', randomNum);
-    BusMall.views++;
-    // console.log(arrayOfImagesToBeDisplayed);
-}
-generateLeftImageAndDisplayIt();
-
-function generateCenterImageAndDisplayIt() {
-    var arrayOfImagesToBeDisplayed = [];
-    var singleImg = document.getElementById('centerImg');
-    var randomNum = rng();
-    arrayOfImagesToBeDisplayed = allItems[randomNum].picture;
-    singleImg.setAttribute('src', arrayOfImagesToBeDisplayed);
-    singleImg.setAttribute('value', randomNum);
-    BusMall.views++;
-    // console.log(arrayOfImagesToBeDisplayed);
-}
-generateCenterImageAndDisplayIt();
-
-function generateRightImageAndDisplayIt() {
-
-    var arrayOfImagesToBeDisplayed = [];
-    var singleImg = document.getElementById('rightImg');
-    var randomNum = rng();
-    arrayOfImagesToBeDisplayed = allItems[randomNum].picture;
-    singleImg.setAttribute('src', arrayOfImagesToBeDisplayed);
-    singleImg.setAttribute('value', randomNum);
-    BusMall.views++;
-
-
-    //  var button = document.getElementById('item3');
-    //  button.setAttribute('value', arrayOfImagesToBeDisplayed)
-    // console.log(arrayOfImagesToBeDisplayed);
-}
-generateRightImageAndDisplayIt();
-
-//use a while loop inside the image generators to prvent it from picking the same image in each iteration
-function voteTwentyFiveTimes() {
-    for (var i = 0; i < 25; i++) {
-        // console.log(votingRoundsTotal);
-        if (votingRoundsTotal < 25) {
-            votingRoundsTotal++;
-        }
-        // if (votingRoundsTotal < 25) {
-
+var indexLeft = document.getElementById('leftImg');
+var indexCenter = document.getElementById('centerImg');
+var indexRight = document.getElementById('rightImg');
+function putThreeImagesOntoThePage() {
+    var ref1 = rng();
+    var ref2 = rng();
+    while (ref1 === ref2) {
+        ref2 = rng();
     }
-    //console.log(votingRoundsTotal);
-    console.log(votingRoundsTotal);
+    var ref3 = rng();
+    while (ref1 === ref3 || ref2 === ref3) {
+        ref3 = rng();
+    }
+    var prod1 = BusMall.allItems[ref1];
+    var prod2 = BusMall.allItems[ref2];
+    var prod3 = BusMall.allItems[ref3];
+    prod1.views++;
+    prod2.views++;
+    prod3.views++;
+    indexLeft.src = prod1.picture;
+    indexCenter.src = prod2.picture;
+    indexRight.src = prod3.picture;
+    indexLeft.setAttribute('value', prod1.name);
+    indexCenter.setAttribute('value', prod2.name);
+    indexRight.setAttribute('value', prod3.name);
 }
-voteTwentyFiveTimes();
+putThreeImagesOntoThePage();
 
+var eventListener1 = document.getElementById('leftImg');
+var eventListener2 = document.getElementById('centerImg');
+var eventListener3 = document.getElementById('rightImg');
+eventListener1.addEventListener('click', voteCounter);
+eventListener2.addEventListener('click', voteCounter);
+eventListener3.addEventListener('click', voteCounter);
 function voteCounter(event) {
-
-    var index = event.target.attributes[0].value;
-    console.log(index);
-    var product = allItems[index];
-    product.clicked += 1;
-
-    console.log(product.views);
     votingRoundsTotal++;
+    var valueOfImage = event.target.getAttribute('value');
+    for (var i = 0; i < BusMall.allItems.length; i++) {
+        if (valueOfImage === BusMall.allItems[i].name) {
+            BusMall.allItems[i].clicked++;
+        }
+    }
 
-
-    console.log('clicky' + product.clicked);
-
-    if (votingRoundsTotal === 24) {
-        eventListener1.removeEventListener('click', voteCounter);
-        eventListener2.removeEventListener('click', voteCounter);
-        eventListener3.removeEventListener('click', voteCounter);
+    if (votingRoundsTotal >= maxRounds) {
+        //show results
+        reportRender();
+    } else {
+        putThreeImagesOntoThePage();
     }
 }
+
+
+function reportRender() {
+    eventListener1.removeEventListener('click', voteCounter);
+    eventListener2.removeEventListener('click', voteCounter);
+    eventListener3.removeEventListener('click', voteCounter);
+    var reportRef = document.getElementById('report');
+    for (var i = 0; i < BusMall.allItems.length; i++) {
+        var item1 = BusMall.allItems[i];
+        var listEl = document.createElement('li');
+        listEl.textContent = `${item1.name} has ${item1.clicked} votes and was displayed ${item1.views} times after twenty-five rounds of voting`
+        reportRef.append(listEl);
+    }
+}
+
+
+
+
+
+// function voteTwentyFiveTimes() {
+//   for (var i = 0; i < 25; i++) {
+//     // console.log(votingRoundsTotal);
+//     if (votingRoundsTotal < 25) {
+//       votingRoundsTotal++;
+//     }
+//     // if (votingRoundsTotal < 25) {
+
+//   }
+//   //console.log(votingRoundsTotal);
+//   console.log(votingRoundsTotal);
+// }
+// voteTwentyFiveTimes();
+// console.log(rng());
+// function generateLeftImageAndDisplayIt() {
+//   var arrayOfImagesToBeDisplayed = [];
+//   var singleImg = document.getElementById('leftImg');
+//   var randomNum = rng();
+//   arrayOfImagesToBeDisplayed = allItems[randomNum].picture;
+//   singleImg.setAttribute('src', arrayOfImagesToBeDisplayed);
+//   singleImg.setAttribute('value', randomNum);
+//   BusMall.views++;
+//   // console.log(arrayOfImagesToBeDisplayed);
+// }
+// generateLeftImageAndDisplayIt();
+
+// function generateCenterImageAndDisplayIt() {
+//   var arrayOfImagesToBeDisplayed = [];
+//   var singleImg = document.getElementById('centerImg');
+//   var randomNum = rng();
+//   arrayOfImagesToBeDisplayed = allItems[randomNum].picture;
+//   singleImg.setAttribute('src', arrayOfImagesToBeDisplayed);
+//   singleImg.setAttribute('value', randomNum);
+//   BusMall.views++;
+//   // console.log(arrayOfImagesToBeDisplayed);
+// }
+// generateCenterImageAndDisplayIt();
+
+// function generateRightImageAndDisplayIt() {
+
+//   var arrayOfImagesToBeDisplayed = [];
+//   var singleImg = document.getElementById('rightImg');
+//   var randomNum = rng();
+//   arrayOfImagesToBeDisplayed = allItems[randomNum].picture;
+//   singleImg.setAttribute('src', arrayOfImagesToBeDisplayed);
+//   singleImg.setAttribute('value', randomNum);
+//   BusMall.views++;
+
+
+//   //  var button = document.getElementById('item3');
+//   //  button.setAttribute('value', arrayOfImagesToBeDisplayed)
+//   // console.log(arrayOfImagesToBeDisplayed);
+// }
+// generateRightImageAndDisplayIt();
+
+// //use a while loop inside the image generators to prvent it from picking the same image in each iteration
+// function voteTwentyFiveTimes() {
+//   for (var i = 0; i < 25; i++) {
+//     // console.log(votingRoundsTotal);
+//     if (votingRoundsTotal < 25) {
+//       votingRoundsTotal++;
+//     }
+//     // if (votingRoundsTotal < 25) {
+
+//   }
+//   //console.log(votingRoundsTotal);
+//   console.log(votingRoundsTotal);
+// }
+// voteTwentyFiveTimes();
+
+// function voteCounter(event) {
+
+//   var index = event.target.attributes[0].value;
+//   console.log(index);
+//   var product = allItems[index];
+//   product.clicked += 1;
+
+//   console.log(product.views);
+//   votingRoundsTotal++;
+
+
+//   console.log('clicky' + product.clicked);
+// }
+
+//   if (votingRoundsTotal === 24) {
+//     eventListener1.removeEventListener('click', voteCounter);
+//     eventListener2.removeEventListener('click', voteCounter);
+//     eventListener3.removeEventListener('click', voteCounter);
+//   }
+// }
 // if (event.target === true) {
 //     generateLeftImageAndDisplayIt();
 //     generateCenterImageAndDisplayIt();
@@ -183,27 +265,15 @@ function voteCounter(event) {
 //     console.log(this.clicked);
 //if source url is === source url then + 1
 //}
-var eventListener1 = document.getElementById('item1');
-var eventListener2 = document.getElementById('item2');
-var eventListener3 = document.getElementById('item3');
-eventListener1.addEventListener('click', voteCounter);
-eventListener2.addEventListener('click', voteCounter);
-eventListener3.addEventListener('click', voteCounter);
+// var eventListener1 = document.getElementById('item1');
+// var eventListener2 = document.getElementById('item2');
+// var eventListener3 = document.getElementById('item3');
+// eventListener1.addEventListener('click', voteCounter);
+// eventListener2.addEventListener('click', voteCounter);
+// eventListener3.addEventListener('click', voteCounter);
 
 
-// var indexLeft = document.getElementById('leftImg')
-// var indexCenter = document.getElementById('centerImg');
-// var indexRight = document.getElementById('rightImg');
-// function putThreeImagesOntoThePage() {
-//     var arrayOfThreePictures = []
-//     for (var i = 0; i < 3; i++)
-//         var singleImg = document.getElementById('leftImg');
-//     arrayOfImagesToBeDisplayed = allItems[arrayOfThreePictures[i]].picture
-//     singleImg.setAttribute('src', arrayOfImagesToBeDisplayed)
-//     arrayOfThreePictures.push(allItems[rng()].productImage)
-//     console.log(arrayOfThreePictures)
-// }
-// putThreeImagesOntoThePage();
+
 
 //indexImg has the image property
 
