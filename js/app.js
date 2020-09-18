@@ -7,8 +7,12 @@ var arrayOfImagesToBeDisplayed = [];
 var integer = rng();
 // var globalSingleImg = [];
 var votingRoundsTotal = 0;
-var maxRounds = 5;
+var maxRounds = 24;
 var arrayOfThreePictures = [];
+var product1 = [];
+var product2 = [];
+var product3 = [];
+
 // var eventListener = document.getElementById('boxOfButtons');
 // eventListener.addEventListener('click', voteCounter);
 //Objects
@@ -29,7 +33,7 @@ new BusMall('shark', '/img/shark.jpg');
 new BusMall('sweep', '/img/sweep.png');
 new BusMall('tauntaun', '/img/tauntaun.jpg');
 new BusMall('unicorn', '/img/unicorn.jpg');
-new BusMall('usb', '/img/water-can.jpg');
+new BusMall('usb', '/img/usb.gif');
 new BusMall('water can', '/img/water-can.jpg');
 new BusMall('wine-glass', '/img/wine-glass.jpg');
 
@@ -40,7 +44,7 @@ function BusMall(itemName, itemImage) {
     this.arrayOfThreePictures = [];
     this.clicked = 0;
     this.views = 0; //this increments everytime an item is displayed
-
+    this.hasBeenSeen = false;
     BusMall.allItems.push(this); //this fills my array of items
 
 }
@@ -102,17 +106,30 @@ var indexCenter = document.getElementById('centerImg');
 var indexRight = document.getElementById('rightImg');
 function putThreeImagesOntoThePage() {
     var ref1 = rng();
+
+    while (BusMall.allItems[ref1].hasBeenSeen === true) {
+        ref1 = rng();
+    }
     var ref2 = rng();
-    while (ref1 === ref2) {
+    while (ref1 === ref2 || BusMall.allItems[ref2].hasBeenSeen === true) {
         ref2 = rng();
     }
     var ref3 = rng();
-    while (ref1 === ref3 || ref2 === ref3) {
+    while (ref1 === ref3 || ref2 === ref3 || BusMall.allItems[ref3].hasBeenSeen === true) {
         ref3 = rng();
+    }
+    for (var j = 0; j < BusMall.allItems.length; j++) {
+        BusMall.allItems[j].hasBeenSeen = false;
     }
     var prod1 = BusMall.allItems[ref1];
     var prod2 = BusMall.allItems[ref2];
     var prod3 = BusMall.allItems[ref3];
+    product1 = prod1;
+    product2 = prod2;
+    product3 = prod3;
+    prod1.hasBeenSeen = true;
+    prod2.hasBeenSeen = true;
+    prod3.hasBeenSeen = true;
     prod1.views++;
     prod2.views++;
     prod3.views++;
@@ -141,10 +158,11 @@ function voteCounter(event) {
     }
 
     if (votingRoundsTotal >= maxRounds) {
-        //show results
+        //create a function that shows the chart.JS thing and call it here
         reportRender();
     } else {
         putThreeImagesOntoThePage();
+
     }
 }
 
@@ -157,194 +175,73 @@ function reportRender() {
     for (var i = 0; i < BusMall.allItems.length; i++) {
         var item1 = BusMall.allItems[i];
         var listEl = document.createElement('li');
-        listEl.textContent = `${item1.name} has ${item1.clicked} votes and was displayed ${item1.views} times after twenty-five rounds of voting`
+        listEl.textContent = `${item1.name} has ${item1.clicked} votes and was displayed ${item1.views} times after twenty-five rounds of voting`;
         reportRef.append(listEl);
     }
 }
+function chartFoo() {
 
+    for (var i = 0; i < BusMall.allItems.length; i++) {
 
+        var chartClick = [BusMall.allItems[i].clicked];
+        var chartViews = [BusMall.allItems[i].views];
+        return chartClick[i], chartViews[i];
+    }
+}
+function addData(chart, label, data) {
+    var name = BusMall.allItems.name;
+    var clicks = BusMall.allItems.clicked;
+    var viewed = BusMall.allItems.views;
+    for (var i = 0; i < BusMall.allItems.length; i++) {
 
+    }
+    chart.data.labels.push(label);
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+    });
+    chart.update();
+}
+function chartNameFoo() {
+    for (var i = 0; i < BusMall.allItems.length; i++) {
+        var chartName = [BusMall.allItems[i].name];
+        myChart.append(chartName);
+    }
 
-
-// function voteTwentyFiveTimes() {
-//   for (var i = 0; i < 25; i++) {
-//     // console.log(votingRoundsTotal);
-//     if (votingRoundsTotal < 25) {
-//       votingRoundsTotal++;
-//     }
-//     // if (votingRoundsTotal < 25) {
-
-//   }
-//   //console.log(votingRoundsTotal);
-//   console.log(votingRoundsTotal);
-// }
-// voteTwentyFiveTimes();
-// console.log(rng());
-// function generateLeftImageAndDisplayIt() {
-//   var arrayOfImagesToBeDisplayed = [];
-//   var singleImg = document.getElementById('leftImg');
-//   var randomNum = rng();
-//   arrayOfImagesToBeDisplayed = allItems[randomNum].picture;
-//   singleImg.setAttribute('src', arrayOfImagesToBeDisplayed);
-//   singleImg.setAttribute('value', randomNum);
-//   BusMall.views++;
-//   // console.log(arrayOfImagesToBeDisplayed);
-// }
-// generateLeftImageAndDisplayIt();
-
-// function generateCenterImageAndDisplayIt() {
-//   var arrayOfImagesToBeDisplayed = [];
-//   var singleImg = document.getElementById('centerImg');
-//   var randomNum = rng();
-//   arrayOfImagesToBeDisplayed = allItems[randomNum].picture;
-//   singleImg.setAttribute('src', arrayOfImagesToBeDisplayed);
-//   singleImg.setAttribute('value', randomNum);
-//   BusMall.views++;
-//   // console.log(arrayOfImagesToBeDisplayed);
-// }
-// generateCenterImageAndDisplayIt();
-
-// function generateRightImageAndDisplayIt() {
-
-//   var arrayOfImagesToBeDisplayed = [];
-//   var singleImg = document.getElementById('rightImg');
-//   var randomNum = rng();
-//   arrayOfImagesToBeDisplayed = allItems[randomNum].picture;
-//   singleImg.setAttribute('src', arrayOfImagesToBeDisplayed);
-//   singleImg.setAttribute('value', randomNum);
-//   BusMall.views++;
-
-
-//   //  var button = document.getElementById('item3');
-//   //  button.setAttribute('value', arrayOfImagesToBeDisplayed)
-//   // console.log(arrayOfImagesToBeDisplayed);
-// }
-// generateRightImageAndDisplayIt();
-
-// //use a while loop inside the image generators to prvent it from picking the same image in each iteration
-// function voteTwentyFiveTimes() {
-//   for (var i = 0; i < 25; i++) {
-//     // console.log(votingRoundsTotal);
-//     if (votingRoundsTotal < 25) {
-//       votingRoundsTotal++;
-//     }
-//     // if (votingRoundsTotal < 25) {
-
-//   }
-//   //console.log(votingRoundsTotal);
-//   console.log(votingRoundsTotal);
-// }
-// voteTwentyFiveTimes();
-
-// function voteCounter(event) {
-
-//   var index = event.target.attributes[0].value;
-//   console.log(index);
-//   var product = allItems[index];
-//   product.clicked += 1;
-
-//   console.log(product.views);
-//   votingRoundsTotal++;
-
-
-//   console.log('clicky' + product.clicked);
-// }
-
-//   if (votingRoundsTotal === 24) {
-//     eventListener1.removeEventListener('click', voteCounter);
-//     eventListener2.removeEventListener('click', voteCounter);
-//     eventListener3.removeEventListener('click', voteCounter);
-//   }
-// }
-// if (event.target === true) {
-//     generateLeftImageAndDisplayIt();
-//     generateCenterImageAndDisplayIt();
-//     generateRightImageAndDisplayIt();
-// } console.log(event.target);
-//   this.clicked += 1;
-//     console.log(this.clicked);
-//if source url is === source url then + 1
-//}
-// var eventListener1 = document.getElementById('item1');
-// var eventListener2 = document.getElementById('item2');
-// var eventListener3 = document.getElementById('item3');
-// eventListener1.addEventListener('click', voteCounter);
-// eventListener2.addEventListener('click', voteCounter);
-// eventListener3.addEventListener('click', voteCounter);
-
-
-
-
-//indexImg has the image property
-
-// getEle0.addEventListener('click', busMall.prototype.tallyVote());
-// getEle1.addEventListener('click', busMall.prototype.tallyVote());
-// getEle2.addEventListener('click', busMall.prototype.tallyVote());
-
-
-
-
-// indexLeft.src = busMall.rngImg();
-
-// function leftIncr() {
-//   for (var i = 0; i < allItems.length; i++) {
-
-//   }
-// }
-// function renderImg() {
-//
-// console.log(indexLeft.src);
-// indexCenter.src = busMall.allitems[rng()].productImage;
-// console.log(indexCenter.src);
-// indexRight.src = busMall.allitems[rng()].productImage;
-// }
-// renderImg();
-// busMall.allItems[leftIndex].views++;
-
-
-
-// function rngImg() {
-
-//     for( var i = 0; i < 3; i++) {
-//         //assign variable with value of rng() push the value into a global array and use that variable as the index on line 80 and in tallyvote function
-//         var x = 'indexImg' + i;
-//         console.log(x);
-//         var imgCall = document.getElementById(x);
-//         console.log(imgCall);
-//         indexImg.src = allItems[rng()].productImage;
-//         indexImg.push(indexImg.src);
-
-//         imgCall.src = indexImg[i];
-
-//     }
-
-// var voteRng = []
-// //i need to make this not select the same image more than once in any individual iteration
-// //i need to make this not display any iterations images on the next iteration
-// //
-
-//   }
-//   for ( var i = 0; i < 3; i++) {
-//       var x = 'indexImg' + i;
-//     document.getElementById(x).setAttribute('src', arrayOfImagesToBeDisplayed2[x])
-//   console.log(arrayOfImagesToBeDisplayed2[x]);
-//   }
-// }
-//     for( var i = 0; i < 3; i++) {
-//         var valuePusher = rng();
-//         voteRng.push(valuePusher); //this needs altered because rng doesnt have the item properties
-//         console.log(voteRng);
-//         //assign variable with value of rng() push the value into a global array
-//         // and use that variable as the index on line 80 and in tallyvote function
-//         var x = 'indexImg' + i;
-//         console.log(x); //these three lines of code are being used to reference the image locations on html page //no image property at thispoint
-//         var imageToBeDisplayed = document.getElementById(x); //this is connecting to the html document
-//         // console.log(imgCall); //imgCall is working is working
-//         console.log(arrayOfImagesToBeDisplayed);
-//         var arrayOfImagesToBeDisplayed2 = []
-//         arrayOfImagesToBeDisplayed = allItems[rng()].productImage; //this is moving the randomly selected image property
-//          arrayOfImagesToBeDisplayed2.push(arrayOfImagesToBeDisplayed); //the teacher mentioned the setattribute function im not sure that is an issue.
-//         imageToBeDisplayed = arrayOfImagesToBeDisplayed2[i];// should this be i or x in the brackets the image is displaying so it is working
-//     console.log(arrayOfImagesToBeDisplayed2[i]);
-
-//         console.log('nothing broken so far');
+}
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [chartNameFoo()],
+        datasets: [{
+            label: '# of Votes',
+            data: [chartFoo()],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
