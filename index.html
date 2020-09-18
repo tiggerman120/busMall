@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <link href="css/canvas.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/style.css" rel="stylesheet">
@@ -9,6 +10,8 @@
 </head>
 
 <body>
+    <!-- <script src="https://cdn.jsdelivr.net/npm.chart.js@2.8.0"></script> -->
+
     <form id="boxOfButtons">
         <fieldset>
             <img value="0" src="" id="leftImg" />
@@ -18,8 +21,17 @@
             <img value="0" src="" id="rightImg" />
         </fieldset>
     </form>
-    <div id="report"></div>
+
+    <ul id="report"></ul>
+    <div>
+        <canvas id="myChart" width="400px" height="400px">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
+                integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg=="
+                crossorigin="anonymous"></script>
+            /<canvas>
+    </div>
     <script src="js/app.js"></script>
+
 </body>
 
 </html>

@@ -1,0 +1,32 @@
+#leftImg {
+    width: 400px;
+    height: 400px;
+    border: 15px solid green;
+    padding: 50px;
+    margin: 20px;
+}
+#leftImg:hover {
+    border: 15px solid black;
+}
+
+#centerImg {
+    width: 400px;
+    height: 400px;
+    border: 15px solid green;
+    padding: 50px;
+    margin: 20px;
+}
+#centerImg:hover {
+    border: 15px solid black;
+}
+
+#rightImg {
+    width: 400px;
+    height: 400px;
+    border: 15px solid green;
+    padding: 50px;
+    margin: 20px;
+}
+#rightImg:hover {
+    border: 15px solid black;
+}
