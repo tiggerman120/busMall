@@ -178,70 +178,128 @@ function reportRender() {
         listEl.textContent = `${item1.name} has ${item1.clicked} votes and was displayed ${item1.views} times after twenty-five rounds of voting`;
         reportRef.append(listEl);
     }
-}
-function chartFoo() {
+    localStorage.setItem('object', JSON.stringify(BusMall.allItems));
+    var stringReturn = localStorage.getItem('object');
+    var parsedSomeArray = JSON.parse(stringReturn);
+    chartRender();
 
-    for (var i = 0; i < BusMall.allItems.length; i++) {
-
-        var chartClick = [BusMall.allItems[i].clicked];
-        var chartViews = [BusMall.allItems[i].views];
-        return chartClick[i], chartViews[i];
-    }
 }
+// json stringify to go into storage parse to go back out when you
+//creat var to assign new value and += totals to add them
+
+var nameBucket = [];
+var viewBucket = [];
+var clickBucket = [];
+
+
+
 function addData(chart, label, data) {
     var name = BusMall.allItems.name;
     var clicks = BusMall.allItems.clicked;
     var viewed = BusMall.allItems.views;
     for (var i = 0; i < BusMall.allItems.length; i++) {
-
     }
     chart.data.labels.push(label);
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.push(data);
+    chart.data.datasets.forEach((clicks, viewed) => {
+        chart.dataset.data.push(data);
     });
     chart.update();
 }
-function chartNameFoo() {
-    for (var i = 0; i < BusMall.allItems.length; i++) {
-        var chartName = [BusMall.allItems[i].name];
-        myChart.append(chartName);
-    }
 
-}
+//im very stuck on getting this to append to the chart... iv got one name to populate but not vote incrementing.
 var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: [chartNameFoo()],
-        datasets: [{
-            label: '# of Votes',
-            data: [chartFoo()],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
+// var chartNames = chartNameFoo();
+function chartRender() {
+    chartFoo();
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: nameBucket,
+            datasets: [{
+                label: '# of Votes',
+                data: clickBucket,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            },
+            {
+                label: '# of Views',
+                data: viewBucket,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
             }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
         }
+    });
+}
+
+
+
+function chartFoo() {
+    for (var i = 0; i < BusMall.allItems.length; i++) {
+        clickBucket.push(BusMall.allItems[i].clicked);
+        viewBucket.push(BusMall.allItems[i].views);
+        nameBucket.push(BusMall.allItems[i].name);
+
+    } //console.log(viewBucket, clickBucket);
+}
+
+// function storageFacility() {
+
+//     storageFacility();
+
+function retrieverCall() {
+    for (let i = 0; i < BusMall.allItems.length; i++) {
+        // console.log(parsedSomeArray[i].picture);
+        new BusMall(parsedSomeArray[i].name, parsedSomeArray[i].picture);
     }
-});
+    console.log(parsedSomeArray);
+}
+
+
+
+// let string = JSON.stringify(someArray)
+// localStorage.setItem('anyKey', string)
+// //Above is setting local storage
+// //Below is getting it out of local storage
+// let stringReturn = localStorage.getItem('anyKey')
+// let parsedSomeArray = JSON.parse(stringReturn)
+//The return loses contextual this, no more prototypes
+//If you need to keep this connection, you would have to run them all back through the constructor function
