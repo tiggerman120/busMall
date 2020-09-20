@@ -2,16 +2,8 @@
 'use strict';
 //global variables
 BusMall.allItems = [];
-var arrayOfImagesToBeDisplayed = [];
-var integer = rng();
-
 var votingRoundsTotal = 0;
 var maxRounds = 24;
-var arrayOfThreePictures = [];
-var product1 = [];
-var product2 = [];
-var product3 = [];
-
 //Objects
 new BusMall('R2D2 Luggage', '/img/bag.jpg');
 new BusMall('banana slicer', '/img/banana.jpg');
@@ -46,11 +38,12 @@ function BusMall(itemName, itemImage) {
 
 }
 
+//random index generator
 function rng() {
     var randomNumber = Math.floor(Math.random() * BusMall.allItems.length);
     return randomNumber;
 }
-
+//placing all images on page and tallies views
 var indexLeft = document.getElementById('leftImg');
 var indexCenter = document.getElementById('centerImg');
 var indexRight = document.getElementById('rightImg');
@@ -74,9 +67,6 @@ function putThreeImagesOntoThePage() {
     var prod1 = BusMall.allItems[ref1];
     var prod2 = BusMall.allItems[ref2];
     var prod3 = BusMall.allItems[ref3];
-    product1 = prod1;
-    product2 = prod2;
-    product3 = prod3;
     prod1.hasBeenSeen = true;
     prod2.hasBeenSeen = true;
     prod3.hasBeenSeen = true;
@@ -92,6 +82,7 @@ function putThreeImagesOntoThePage() {
 }
 putThreeImagesOntoThePage();
 
+//tallies user votes and ends voting or renders new images
 var eventListener1 = document.getElementById('leftImg');
 var eventListener2 = document.getElementById('centerImg');
 var eventListener3 = document.getElementById('rightImg');
@@ -106,7 +97,6 @@ function voteCounter(event) {
             BusMall.allItems[i].clicked++;
         }
     }
-
     if (votingRoundsTotal >= maxRounds) {
         reportRender();
     } else {
@@ -114,7 +104,7 @@ function voteCounter(event) {
 
     }
 }
-
+//renders the list
 function reportRender() {
     eventListener1.removeEventListener('click', voteCounter);
     eventListener2.removeEventListener('click', voteCounter);
@@ -129,12 +119,7 @@ function reportRender() {
     localStorage.setItem('object', JSON.stringify(BusMall.allItems));
     chartRender();
 }
-
-
-var nameBucket = [];
-var viewBucket = [];
-var clickBucket = [];
-
+//renders the chart
 var ctx = document.getElementById('myChart').getContext('2d');
 function chartRender() {
     chartFoo();
@@ -252,21 +237,25 @@ function chartRender() {
         }
     });
 }
-
+//pushes values for use in local storage
+var nameBucket = [];
+var viewBucket = [];
+var clickBucket = [];
 var stringReturn = localStorage.getItem('object');
 var parsedSomeArray = JSON.parse(stringReturn);
 function chartFoo() {
     for (var i = 0; i < BusMall.allItems.length; i++) {
         clickBucket.push(BusMall.allItems[i].clicked);
+
         viewBucket.push(BusMall.allItems[i].views);
+
         nameBucket.push(BusMall.allItems[i].name);
     }
-
 }
 if (localStorage.object) {
     stringReturn; parsedSomeArray;
-    console.log('data was found');
-} else {
+}
+else {
     console.log('data not found making new objects');
     new BusMall('R2D2 Luggage', '/img/bag.jpg');
     new BusMall('banana slicer', '/img/banana.jpg');
