@@ -166,7 +166,6 @@ function voteCounter(event) {
     }
 }
 
-
 function reportRender() {
     eventListener1.removeEventListener('click', voteCounter);
     eventListener2.removeEventListener('click', voteCounter);
@@ -179,36 +178,15 @@ function reportRender() {
         reportRef.append(listEl);
     }
     localStorage.setItem('object', JSON.stringify(BusMall.allItems));
-    var stringReturn = localStorage.getItem('object');
-    var parsedSomeArray = JSON.parse(stringReturn);
     chartRender();
-
 }
-// json stringify to go into storage parse to go back out when you
-//creat var to assign new value and += totals to add them
+
 
 var nameBucket = [];
 var viewBucket = [];
 var clickBucket = [];
 
-
-
-function addData(chart, label, data) {
-    var name = BusMall.allItems.name;
-    var clicks = BusMall.allItems.clicked;
-    var viewed = BusMall.allItems.views;
-    for (var i = 0; i < BusMall.allItems.length; i++) {
-    }
-    chart.data.labels.push(label);
-    chart.data.datasets.forEach((clicks, viewed) => {
-        chart.dataset.data.push(data);
-    });
-    chart.update();
-}
-
-//im very stuck on getting this to append to the chart... iv got one name to populate but not vote incrementing.
 var ctx = document.getElementById('myChart').getContext('2d');
-// var chartNames = chartNameFoo();
 function chartRender() {
     chartFoo();
     var myChart = new Chart(ctx, {
@@ -224,7 +202,21 @@ function chartRender() {
                     'rgba(255, 206, 86, 0.2)',
                     'rgba(75, 192, 192, 0.2)',
                     'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(25, 105, 64, 0.2)',
+                    'rgba(205, 169, 64, 0.2)',
+                    'rgba(115, 179, 64, 0.2)',
+                    'rgba(95, 139, 64, 0.2)',
+                    'rgba(45, 199, 64, 0.2)',
+                    'rgba(245, 29, 64, 0.2)',
+                    'rgba(215, 189, 64, 0.2)',
+                    'rgba(125, 70, 64, 0.2)',
+                    'rgba(50, 50, 64, 0.2)',
+                    'rgba(30, 100, 64, 0.2)',
+                    'rgba(70, 139, 64, 0.2)',
+                    'rgba(160, 129, 64, 0.2)',
+                    'rgba(175, 179, 64, 0.2)',
+                    'rgba(135, 109, 64, 0.2)',
                 ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)',
@@ -232,7 +224,21 @@ function chartRender() {
                     'rgba(255, 206, 86, 1)',
                     'rgba(75, 192, 192, 1)',
                     'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
                 ],
                 borderWidth: 1
             },
@@ -245,7 +251,21 @@ function chartRender() {
                     'rgba(255, 206, 86, 0.2)',
                     'rgba(75, 192, 192, 0.2)',
                     'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
                 ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)',
@@ -253,7 +273,21 @@ function chartRender() {
                     'rgba(255, 206, 86, 1)',
                     'rgba(75, 192, 192, 1)',
                     'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
                 ],
                 borderWidth: 1
             }]
@@ -270,36 +304,39 @@ function chartRender() {
     });
 }
 
-
-
+var stringReturn = localStorage.getItem('object');
+var parsedSomeArray = JSON.parse(stringReturn);
 function chartFoo() {
     for (var i = 0; i < BusMall.allItems.length; i++) {
         clickBucket.push(BusMall.allItems[i].clicked);
         viewBucket.push(BusMall.allItems[i].views);
         nameBucket.push(BusMall.allItems[i].name);
-
-    } //console.log(viewBucket, clickBucket);
-}
-
-// function storageFacility() {
-
-//     storageFacility();
-
-function retrieverCall() {
-    for (let i = 0; i < BusMall.allItems.length; i++) {
-        // console.log(parsedSomeArray[i].picture);
-        new BusMall(parsedSomeArray[i].name, parsedSomeArray[i].picture);
     }
-    console.log(parsedSomeArray);
+
 }
-
-
-
-// let string = JSON.stringify(someArray)
-// localStorage.setItem('anyKey', string)
-// //Above is setting local storage
-// //Below is getting it out of local storage
-// let stringReturn = localStorage.getItem('anyKey')
-// let parsedSomeArray = JSON.parse(stringReturn)
-//The return loses contextual this, no more prototypes
-//If you need to keep this connection, you would have to run them all back through the constructor function
+if (localStorage.object) {
+    stringReturn; parsedSomeArray;
+    console.log('data was found');
+} else {
+    console.log('data not found making new objects');
+    new BusMall('R2D2 Luggage', '/img/bag.jpg');
+    new BusMall('banana slicer', '/img/banana.jpg');
+    new BusMall('lazy Pooper', '/img/bathroom.jpg');
+    new BusMall('toeless boots', '/img/boots.jpg');
+    new BusMall('breakfast machine', '/img/breakfast.jpg');
+    new BusMall('meatball gum', '/img/bubblegum.jpg');
+    new BusMall('straddle chair', '/img/chair.jpg');
+    new BusMall('cthulhu figurine', '/img/cthulhu.jpg');
+    new BusMall('duck muzzle', '/img/dog-duck.jpg');
+    new BusMall('dragon meat', '/img/dragon.jpg');
+    new BusMall('utensil pens', '/img/pen.jpg');
+    new BusMall('dog broom feet', '/img/pet-sweep.jpg');
+    new BusMall('pizza scissors', '/img/scissors.jpg');
+    new BusMall('shark', '/img/shark.jpg');
+    new BusMall('sweep', '/img/sweep.png');
+    new BusMall('tauntaun', '/img/tauntaun.jpg');
+    new BusMall('unicorn', '/img/unicorn.jpg');
+    new BusMall('usb', '/img/usb.gif');
+    new BusMall('water can', '/img/water-can.jpg');
+    new BusMall('wine-glass', '/img/wine-glass.jpg');
+}
