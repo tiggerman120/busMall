@@ -1,11 +1,10 @@
 /* eslint-disable indent */
 'use strict';
-//i need to generate 3 new images. increment everything properly. get clarification on bullet 1 of step 4 and display votes received and number oftimes each image is views
 //global variables
 BusMall.allItems = [];
 var arrayOfImagesToBeDisplayed = [];
 var integer = rng();
-// var globalSingleImg = [];
+
 var votingRoundsTotal = 0;
 var maxRounds = 24;
 var arrayOfThreePictures = [];
@@ -13,8 +12,6 @@ var product1 = [];
 var product2 = [];
 var product3 = [];
 
-// var eventListener = document.getElementById('boxOfButtons');
-// eventListener.addEventListener('click', voteCounter);
 //Objects
 new BusMall('R2D2 Luggage', '/img/bag.jpg');
 new BusMall('banana slicer', '/img/banana.jpg');
@@ -43,63 +40,16 @@ function BusMall(itemName, itemImage) {
     this.picture = itemImage;
     this.arrayOfThreePictures = [];
     this.clicked = 0;
-    this.views = 0; //this increments everytime an item is displayed
+    this.views = 0;
     this.hasBeenSeen = false;
-    BusMall.allItems.push(this); //this fills my array of items
+    BusMall.allItems.push(this);
 
 }
-
-// busMall.prototype.tallyVote = function(event) {
-//     this.clicked += 1;
-//     //i think im missing something with attaching my event listener but i dont know
-//     //i need this to increment everytime i click an image.
-//     //the teacher mentioned the setAttribute() when you use .src. is that my issue with the clicks not logging?
-//     //i think another issue is that voteRng has the rng function passed into it which is generating a random index value
-//     //but it is not generating the actual image value in that indsex position so the image never gets referenced.
-//     //im not sure how to fix that with my rngImg function looping through 3 images?
-//     console.log(voteRng) ;
-//     }
-// busMall.prototype.tallyVote();
-
-
-
 
 function rng() {
     var randomNumber = Math.floor(Math.random() * BusMall.allItems.length);
     return randomNumber;
-    //this function generates a random number and uses it as an index reference number
-    //that is why my clicks dont work
 }
-
-
-// function getMyShitOnTheScreenWithWhileLoops() {
-//     //this will hold all 3 index values
-//     arrayOfThreePictures = [];
-//     //this will store the first two pictures
-//     arrayOfThreePictures[0] = rng();
-//     arrayOfThreePictures[1] = rng();
-//     //I need someone to help me with while loops I don't think i understand them.
-//     while (arrayOfThreePictures[0] === arrayOfThreePictures[1]) {
-//         console.log('this is checking if the while loop ran');
-//         arrayOfThreePictures[1] = rng();
-
-//         //I am comparing the third unique picture
-//         arrayOfThreePictures[2] = rng();
-//         while (arrayOfThreePictures[2] === arrayOfThreePictures[1] || arrayOfThreePictures[2] === arrayOfThreePictures[0]); {
-//             console.log('this is checking if the while loop ran');
-//             arrayOfThreePictures[2] = rng();
-//         }
-//         console.log(arrayOfThreePictures[0]);
-//     }
-//     // eslint-disable-next-line indent
-//     //   for (var i = 0; i < 3; i++) {
-//     //     //i dont know how to call these file paths. //is this dot notation? i am so stressed out i really cant afford to feel this fucking lost
-//     //     allItems.picture[i].src = allItems[arrayOfThreePictures[i]].path;
-//     //     BusMall.picture[i].id = BusMall.allItems[arrayOfThreePictures[i]].name;
-//     //     BusMall.allItems[arrayOfThreePictures[i]].views += 1;
-
-// }
-// getMyShitOnTheScreenWithWhileLoops();
 
 var indexLeft = document.getElementById('leftImg');
 var indexCenter = document.getElementById('centerImg');
@@ -158,7 +108,6 @@ function voteCounter(event) {
     }
 
     if (votingRoundsTotal >= maxRounds) {
-        //create a function that shows the chart.JS thing and call it here
         reportRender();
     } else {
         putThreeImagesOntoThePage();
